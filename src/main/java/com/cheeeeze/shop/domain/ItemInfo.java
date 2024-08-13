@@ -1,14 +1,13 @@
 package com.cheeeeze.shop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-//@Entity
-public class Item {
+@Entity
+@Table( name = "ITEM_INFO" )
+public class ItemInfo {
+	
 	@Id @GeneratedValue
-	@Column( name = "ITEM_ID")
+	@Column( name = "ITEM_ID" )
 	private Long id;
 	private String name;
 	private int price;

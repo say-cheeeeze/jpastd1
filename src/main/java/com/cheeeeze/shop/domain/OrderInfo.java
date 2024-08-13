@@ -1,11 +1,16 @@
 package com.cheeeeze.shop.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
-//@Entity
-//@Table( name = "ORDERS" )
-public class Order {
+/**
+ * 주문 정보
+ */
+@Entity
+@Table( name = "ORDER_INFO" )
+public class OrderInfo {
 	
 	@Id @GeneratedValue( strategy = GenerationType.AUTO )
 	@Column( name = "ORDER_ID")
@@ -13,7 +18,11 @@ public class Order {
 	
 	@ManyToOne
 	@JoinColumn( name = "MEMBER_ID")
-	private Member member;
+	private MemberInfo memberInfo;
+	
+	// 주문 1 에 관련된 상품 N 목록
+	@OneToMany( mappedBy = "orderInfo" )
+	private List<OrderItemInfo> orderItemList = new ArrayList<>();
 	
 	private LocalDateTime orderDate;
 	
@@ -28,12 +37,20 @@ public class Order {
 		this.id = id;
 	}
 	
-	public Member getMember() {
-		return member;
+	public MemberInfo getMemberInfo() {
+		return memberInfo;
 	}
 	
-	public void setMember( Member member ) {
-		this.member = member;
+	public void setMemberInfo( MemberInfo member ) {
+		this.memberInfo = member;
+	}
+	
+	public List<OrderItemInfo> getOrderItemList() {
+		return orderItemList;
+	}
+	
+	public void setOrderItemList( List<OrderItemInfo> orderItemList ) {
+		this.orderItemList = orderItemList;
 	}
 	
 	public LocalDateTime getOrderDate() {

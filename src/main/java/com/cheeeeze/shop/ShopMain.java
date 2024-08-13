@@ -1,13 +1,12 @@
 package com.cheeeeze.shop;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.cheeeeze.shop.domain.Member;
-import com.cheeeeze.shop.domain.Team;
+import com.cheeeeze.shop.domain.*;
 
 public class ShopMain {
 	
@@ -27,22 +26,42 @@ public class ShopMain {
 		tx.begin(); // db transaction 시작 선언
 		
 		try {
-			Team team = new Team();
-			team.setName( "teamUSA" );
-			em.persist( team );
-
-			Member member = new Member();
+			
+			ItemInfo itemCharger = new ItemInfo();
+			itemCharger.setName( "휴대용충전기" );
+			itemCharger.setPrice( 50000 );
+			itemCharger.setStockQuantity( 10 );
+			em.persist( itemCharger );
+			
+			ItemInfo itemFan = new ItemInfo();
+			itemFan.setName( "선풍기" );
+			itemFan.setPrice( 35700 );
+			itemFan.setStockQuantity( 10 );
+			em.persist( itemFan );
+			
+			OrderItemInfo orderItem1 = new OrderItemInfo();
+			orderItem1.setCount( 1 );
+			orderItem1.setItem( itemCharger );
+			em.persist( orderItem1 );
+			
+			OrderItemInfo orderItem2 = new OrderItemInfo();
+			orderItem2.setCount( 1 );
+			orderItem2.setItem( itemCharger );
+			em.persist( orderItem2 );
+			
+			MemberInfo member = new MemberInfo();
 			member.setName( "yoonjae" );
-			member.changeTeam( team );
+			member.setStreet( "양천구" );
+			member.setZipCode( "07938" );
 			em.persist( member );
 			
-			Team findTeam = em.find( Team.class, 1L );
-			System.out.println( "##########################" );
-			List<Member> members = findTeam.getMembers();
-			System.out.println( "members = " + members ); // []
-			for ( Member member1 : members ) {
-				System.out.println( "member1.getName() = " + member1.getName() );
-			}
+			OrderInfo order = new OrderInfo();
+			order.setMemberInfo( member );
+			order.getOrderItemList().add( orderItem1 );
+			order.getOrderItemList().add( orderItem2 );
+			order.setOrderDate( LocalDateTime.now() );
+			order.setStatus( OrderStatus.ORDER );
+			em.persist( order );
 			
 			tx.commit();
 		}

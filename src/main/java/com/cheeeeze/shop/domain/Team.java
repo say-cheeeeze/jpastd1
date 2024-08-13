@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Team {
 	
 	@Id @GeneratedValue( strategy = GenerationType.AUTO )
@@ -12,7 +12,7 @@ public class Team {
 	private String name;
 	
 	@OneToMany( mappedBy = "team" )
-	private List<Member> members = new ArrayList<>();
+	private List<MemberInfo> members = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -30,11 +30,11 @@ public class Team {
 		this.name = name;
 	}
 	
-	public List<Member> getMembers() {
+	public List<MemberInfo> getMembers() {
 		return members;
 	}
 	
-	public void setMembers( List<Member> members ) {
+	public void setMembers( List<MemberInfo> members ) {
 		this.members = members;
 	}
 }
