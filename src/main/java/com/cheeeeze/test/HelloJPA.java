@@ -1,4 +1,4 @@
-package com.cheeeeze.jpa;
+package com.cheeeeze.test;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.cheeeeze.jpa.vo.Member;
+import com.cheeeeze.test.vo.MemberLegacy;
 
 public class HelloJPA {
 	
@@ -51,42 +51,42 @@ public class HelloJPA {
 	}
 	
 	private static void saveMemberOne( EntityManager em ) {
-		Member member = new Member();
-		member.setName( "ADMINYJ" );
+		MemberLegacy memberLegacy = new MemberLegacy();
+		memberLegacy.setName( "ADMINYJ" );
 //		member.setRoleType( RoleType.ADMIN );
 		System.out.println( "################" );
-		em.persist( member ); // 이 다음에 commit한다
-		System.out.println( "member.getId() = " + member.getId() );
+		em.persist( memberLegacy ); // 이 다음에 commit한다
+		System.out.println( "member.getId() = " + memberLegacy.getId() );
 		System.out.println( "################" );
 	}
 	
 	private static void saveMembers( EntityManager em ) {
 		for ( long i = 0; i < 10; i++ ) {
-			Member m = new Member();
+			MemberLegacy m = new MemberLegacy();
 			m.setName( i + "name" );
 			em.persist( m );
 		}
 	}
 	
-	private static List<Member> getMemberPageList( EntityManager em ) {
+	private static List<MemberLegacy> getMemberPageList( EntityManager em ) {
 		
-		List<Member> resultList = em.createQuery( "select m from Member as m", Member.class )
-									.setFirstResult( 5 )
-									.setMaxResults( 10 )
-									.getResultList();
+		List<MemberLegacy> resultList = em.createQuery( "select m from MemberLegacy as m", MemberLegacy.class )
+										  .setFirstResult( 5 )
+										  .setMaxResults( 10 )
+										  .getResultList();
 		
-		for ( Member member : resultList ) {
-			System.out.println( "member.getName() = " + member.getName() );
+		for ( MemberLegacy memberLegacy : resultList ) {
+			System.out.println( "member.getName() = " + memberLegacy.getName() );
 		}
 		return resultList;
 	}
 	
-	private static List<Member> getMemberList( EntityManager em ) {
+	private static List<MemberLegacy> getMemberList( EntityManager em ) {
 		
 		// JPQL
-		List<Member> resultList = em.createQuery( "select m from Member as m", Member.class ).getResultList();
-		for ( Member member : resultList ) {
-			System.out.println( "member.getName() = " + member.getName() );
+		List<MemberLegacy> resultList = em.createQuery( "select m from MemberLegacy as m", MemberLegacy.class ).getResultList();
+		for ( MemberLegacy memberLegacy : resultList ) {
+			System.out.println( "member.getName() = " + memberLegacy.getName() );
 		}
 		return resultList;
 	}

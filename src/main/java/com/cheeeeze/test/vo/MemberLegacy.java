@@ -1,10 +1,9 @@
-package com.cheeeeze.jpa.vo;
+package com.cheeeeze.test.vo;
 
-import java.util.Date;
 import javax.persistence.*;
 
-// 이 애노테이션이 있어야 jpa 가 entity 로 관리한다.
-@Entity
+// 이 애노테이션이 있어야 test 가 entity 로 관리한다.
+//@Entity
 @Table
 @SequenceGenerator(
 			name = "MEMBER_SEQ_GEN",
@@ -12,7 +11,7 @@ import javax.persistence.*;
 			initialValue = 1,
 			allocationSize = 50
 )
-public class Member {
+public class MemberLegacy {
 	
 	@Id // primary key 애노테이션
 	@GeneratedValue( strategy = GenerationType.SEQUENCE,
@@ -34,7 +33,7 @@ public class Member {
 	@Lob
 	private String description;*/
 	
-	public Member() {
+	public MemberLegacy() {
 	}
 	
 	public Long getId() {

@@ -1,4 +1,4 @@
-package com.cheeeeze.jpa.vo;
+package com.cheeeeze.test.vo;
 
 public enum RoleType {
 	
