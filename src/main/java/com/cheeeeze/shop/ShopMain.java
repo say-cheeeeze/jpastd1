@@ -30,17 +30,16 @@ public class ShopMain {
 			Team team = new Team();
 			team.setName( "teamUSA" );
 			em.persist( team );
-			
+
 			Member member = new Member();
 			member.setName( "yoonjae" );
-			member.setTeam( team );
+			member.changeTeam( team );
 			em.persist( member );
 			
-			em.flush();
-			em.clear();
-			
-			Team team1 = em.find( Team.class, 1L );
-			List<Member> members = team1.getMembers();
+			Team findTeam = em.find( Team.class, 1L );
+			System.out.println( "##########################" );
+			List<Member> members = findTeam.getMembers();
+			System.out.println( "members = " + members ); // []
 			for ( Member member1 : members ) {
 				System.out.println( "member1.getName() = " + member1.getName() );
 			}
