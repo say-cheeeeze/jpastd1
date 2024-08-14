@@ -26,42 +26,15 @@ public class ShopMain {
 		tx.begin(); // db transaction 시작 선언
 		
 		try {
+			LockerInfo lockerInfo = new LockerInfo();
+			lockerInfo.setName( "lockerA" );
+			em.persist( lockerInfo );
 			
-			ItemInfo itemCharger = new ItemInfo();
-			itemCharger.setName( "휴대용충전기" );
-			itemCharger.setPrice( 50000 );
-			itemCharger.setStockQuantity( 10 );
-			em.persist( itemCharger );
+			MemberInfo memberInfo = new MemberInfo();
+			memberInfo.setName( "yoonjae" );
+			memberInfo.setLockerInfo( lockerInfo );
 			
-			ItemInfo itemFan = new ItemInfo();
-			itemFan.setName( "선풍기" );
-			itemFan.setPrice( 35700 );
-			itemFan.setStockQuantity( 10 );
-			em.persist( itemFan );
-			
-			OrderItemInfo orderItem1 = new OrderItemInfo();
-			orderItem1.setCount( 1 );
-			orderItem1.setItem( itemCharger );
-			em.persist( orderItem1 );
-			
-			OrderItemInfo orderItem2 = new OrderItemInfo();
-			orderItem2.setCount( 1 );
-			orderItem2.setItem( itemCharger );
-			em.persist( orderItem2 );
-			
-			MemberInfo member = new MemberInfo();
-			member.setName( "yoonjae" );
-			member.setStreet( "양천구" );
-			member.setZipCode( "07938" );
-			em.persist( member );
-			
-			OrderInfo order = new OrderInfo();
-			order.setMemberInfo( member );
-			order.getOrderItemList().add( orderItem1 );
-			order.getOrderItemList().add( orderItem2 );
-			order.setOrderDate( LocalDateTime.now() );
-			order.setStatus( OrderStatus.ORDER );
-			em.persist( order );
+			em.persist( memberInfo );
 			
 			tx.commit();
 		}

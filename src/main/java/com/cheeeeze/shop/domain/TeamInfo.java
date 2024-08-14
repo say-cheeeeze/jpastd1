@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-//@Entity
-public class Team {
+@Entity
+@Table( name = "TEAM_INFO")
+public class TeamInfo {
 	
 	@Id @GeneratedValue( strategy = GenerationType.AUTO )
 	private Long id;
 	private String name;
 	
-	@OneToMany( mappedBy = "team" )
+	@OneToMany
+	@JoinColumn( name = "TEAM_ID")
 	private List<MemberInfo> members = new ArrayList<>();
 	
 	public Long getId() {

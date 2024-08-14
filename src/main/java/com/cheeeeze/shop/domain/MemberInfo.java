@@ -1,7 +1,5 @@
 package com.cheeeeze.shop.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -16,11 +14,10 @@ public class MemberInfo {
 	private String street;
 	private String zipCode;
 	
-	// 주문 정보에 회원 값이 있기 때문에 굳이 회원에서도 주문 목록을
-	// 가지고 있을 필요가 없다.
-	// => 주석함이 좋다.
-//	@OneToMany( mappedBy = "memberInfo" )
-//	private List<OrderInfo> orderList = new ArrayList<>();
+	@OneToOne
+	@JoinColumn( name = "LOCKER_ID")
+	private LockerInfo lockerInfo;
+	
 	
 	public Long getId() {
 		return id;
@@ -52,5 +49,13 @@ public class MemberInfo {
 	
 	public void setZipCode( String zipCode ) {
 		this.zipCode = zipCode;
+	}
+	
+	public LockerInfo getLockerInfo() {
+		return lockerInfo;
+	}
+	
+	public void setLockerInfo( LockerInfo lockerInfo ) {
+		this.lockerInfo = lockerInfo;
 	}
 }
