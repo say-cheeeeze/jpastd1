@@ -1,9 +1,11 @@
 package com.cheeeeze.shop.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "MEMBER_INFO" )
+@Table( name = "TBL_MEMBER" )
 public class MemberInfo {
 	
 	@Id
@@ -12,12 +14,20 @@ public class MemberInfo {
 	private Long id;
 	private String name;
 	private String street;
+	private String city;
 	private String zipCode;
 	
-	@OneToOne
-	@JoinColumn( name = "LOCKER_ID")
-	private LockerInfo lockerInfo;
+	@OneToMany
+	@JoinColumn( name = "ORDER_ID")
+	private List<OrderInfo> orderList = new ArrayList<>();
 	
+	public String getCity() {
+		return city;
+	}
+	
+	public void setCity( String city ) {
+		this.city = city;
+	}
 	
 	public Long getId() {
 		return id;
@@ -51,11 +61,11 @@ public class MemberInfo {
 		this.zipCode = zipCode;
 	}
 	
-	public LockerInfo getLockerInfo() {
-		return lockerInfo;
+	public List<OrderInfo> getOrderList() {
+		return orderList;
 	}
 	
-	public void setLockerInfo( LockerInfo lockerInfo ) {
-		this.lockerInfo = lockerInfo;
+	public void setOrderList( List<OrderInfo> orderList ) {
+		this.orderList = orderList;
 	}
 }

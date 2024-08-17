@@ -1,15 +1,13 @@
 package com.cheeeeze.shop.domain;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
  * 주문 정보
  */
 @Entity
-@Table( name = "ORDER_INFO" )
+@Table( name = "TBL_ORDER" )
 public class OrderInfo {
 	
 	@Id @GeneratedValue( strategy = GenerationType.AUTO )
@@ -20,14 +18,14 @@ public class OrderInfo {
 	@JoinColumn( name = "MEMBER_ID")
 	private MemberInfo memberInfo;
 	
-	// 주문 1 에 관련된 상품 N 목록
-	@OneToMany( mappedBy = "orderInfo" )
-	private List<OrderItemInfo> orderItemList = new ArrayList<>();
+	// 주문 정보와 배송정보는 1:1
+	@OneToOne
+	@JoinColumn( name = "DELIVERY_ID") // 연관관계의 주인은 배송정보로 정함
+	private DeliveryInfo deliveryInfo;
 	
-	private LocalDateTime orderDate;
+	private Date orderDate;
 	
-	@Enumerated( value = EnumType.STRING )
-	private OrderStatus status;
+	private OrderStatus orderStatus;
 	
 	public Long getId() {
 		return id;
@@ -41,31 +39,31 @@ public class OrderInfo {
 		return memberInfo;
 	}
 	
-	public void setMemberInfo( MemberInfo member ) {
-		this.memberInfo = member;
+	public void setMemberInfo( MemberInfo memberInfo ) {
+		this.memberInfo = memberInfo;
 	}
 	
-	public List<OrderItemInfo> getOrderItemList() {
-		return orderItemList;
+	public DeliveryInfo getDeliveryInfo() {
+		return deliveryInfo;
 	}
 	
-	public void setOrderItemList( List<OrderItemInfo> orderItemList ) {
-		this.orderItemList = orderItemList;
+	public void setDeliveryInfo( DeliveryInfo deliveryInfo ) {
+		this.deliveryInfo = deliveryInfo;
 	}
 	
-	public LocalDateTime getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 	
-	public void setOrderDate( LocalDateTime orderDate ) {
+	public void setOrderDate( Date orderDate ) {
 		this.orderDate = orderDate;
 	}
 	
-	public OrderStatus getStatus() {
-		return status;
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
 	}
 	
-	public void setStatus( OrderStatus status ) {
-		this.status = status;
+	public void setOrderStatus( OrderStatus orderStatus ) {
+		this.orderStatus = orderStatus;
 	}
 }

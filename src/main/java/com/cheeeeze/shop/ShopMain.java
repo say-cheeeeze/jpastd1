@@ -26,15 +26,6 @@ public class ShopMain {
 		tx.begin(); // db transaction 시작 선언
 		
 		try {
-			LockerInfo lockerInfo = new LockerInfo();
-			lockerInfo.setName( "lockerA" );
-			em.persist( lockerInfo );
-			
-			MemberInfo memberInfo = new MemberInfo();
-			memberInfo.setName( "yoonjae" );
-			memberInfo.setLockerInfo( lockerInfo );
-			
-			em.persist( memberInfo );
 			
 			tx.commit();
 		}

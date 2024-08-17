@@ -2,8 +2,8 @@ package com.cheeeeze.shop.domain;
 
 import javax.persistence.*;
 
-@Entity
-@Table( name = "LOCKER_INFO" )
+//@Entity
+//@Table( name = "TBL_LOCKER" )
 public class LockerInfo {
 
 	@Id @GeneratedValue
