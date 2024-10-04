@@ -33,7 +33,7 @@ public class MemberInfo {
 		return id;
 	}
 	
-	public void setId( Long id ) {
+	private void setId( Long id ) {
 		this.id = id;
 	}
 	
@@ -67,5 +67,16 @@ public class MemberInfo {
 	
 	public void setOrderList( List<OrderInfo> orderList ) {
 		this.orderList = orderList;
+	}
+	
+	@Override public String toString() {
+		return "MemberInfo{" +
+			   "id=" + id +
+			   ", name='" + name + '\'' +
+			   ", street='" + street + '\'' +
+			   ", city='" + city + '\'' +
+			   ", zipCode='" + zipCode + '\'' +
+			   ", orderList=" + orderList +
+			   '}';
 	}
 }
