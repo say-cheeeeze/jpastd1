@@ -1,10 +1,7 @@
 package com.cheeeeze.shop;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 import com.cheeeeze.shop.domain.*;
 
@@ -28,11 +25,6 @@ public class ShopMain {
 		
 		try {
 			
-			BookInfo book1 = new BookInfo();
-			book1.setTitle( "book1" );
-			em.persist( book1 );
-			
-			System.out.println( "book1.getId() = " + book1.getId() );
 			
 			tx.commit();
 		}
